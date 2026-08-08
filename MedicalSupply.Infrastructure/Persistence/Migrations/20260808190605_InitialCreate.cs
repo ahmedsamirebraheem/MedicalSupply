@@ -42,7 +42,7 @@ namespace MedicalSupply.Infrastructure.Persistence.Migrations
                     RequiresPharmacyApproval = table.Column<bool>(type: "bit", nullable: false),
                     IsControlledMedication = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    RowVersion = table.Column<long>(type: "bigint", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,7 +64,7 @@ namespace MedicalSupply.Infrastructure.Persistence.Migrations
                     RejectionReason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RowVersion = table.Column<long>(type: "bigint", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {

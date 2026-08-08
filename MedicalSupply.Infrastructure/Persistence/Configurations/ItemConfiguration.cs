@@ -46,7 +46,7 @@ namespace MedicalSupply.Infrastructure.Persistence.Configurations
             builder.Property(i => i.IsActive)
                 .IsRequired();
 
-            builder.Property<uint>("RowVersion")
+            builder.Property<byte[]>("RowVersion")
                 .IsRowVersion();
         }
 

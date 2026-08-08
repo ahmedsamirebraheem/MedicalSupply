@@ -56,7 +56,7 @@ namespace MedicalSupply.Infrastructure.Persistence.Configurations
             builder.HasIndex(r => r.Status);
             builder.HasIndex(r => r.RequestDate);
 
-            builder.Property<uint>("RowVersion")
+            builder.Property<byte[]>("RowVersion")
                 .IsRowVersion();
         }
 
