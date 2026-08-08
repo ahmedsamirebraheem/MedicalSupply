@@ -17,9 +17,19 @@ namespace MedicalSupply.Infrastructure.Persistence
 
         public async Task<string> GenerateAsync(CancellationToken cancellationToken = default)
         {
-            var nextValue = await _context.Database
-                .SqlQuery<int>($"SELECT NEXT VALUE FOR RequestNumberSequence AS Value")
-                .SingleAsync(cancellationToken);
+            var sequenceParam = new Microsoft.Data.SqlClient.SqlParameter
+            {
+                ParameterName = "@result",
+                SqlDbType = System.Data.SqlDbType.Int,
+                Direction = System.Data.ParameterDirection.Output
+            };
+
+            await _context.Database.ExecuteSqlRawAsync(
+                "SET @result = NEXT VALUE FOR RequestNumberSequence",
+                new object[] { sequenceParam },
+                cancellationToken);
+
+            var nextValue = (int)sequenceParam.Value;
 
             var year = DateTime.UtcNow.Year;
 
