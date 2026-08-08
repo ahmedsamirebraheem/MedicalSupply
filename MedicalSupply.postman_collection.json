@@ -1,0 +1,284 @@
+{
+  "info": {
+    "name": "Medical Supply Request Management API",
+    "description": "Collection covering authentication, departments, items, and the full supply request lifecycle.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://localhost:7040" },
+    { "key": "token", "value": "" },
+    { "key": "departmentId", "value": "1" },
+    { "key": "itemId", "value": "1" },
+    { "key": "requestId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@company.com\",\n  \"password\": \"Pass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Login (Requester)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"requester@company.com\",\n  \"password\": \"Pass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Login (Department Manager)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@company.com\",\n  \"password\": \"Pass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Login (Pharmacist)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"pharmacist@company.com\",\n  \"password\": \"Pass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Login (Finance Officer)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"finance@company.com\",\n  \"password\": \"Pass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Login (Store Keeper)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"storekeeper@company.com\",\n  \"password\": \"Pass123!\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Departments",
+      "item": [
+        {
+          "name": "Create Department",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"RAD\",\n  \"name\": \"Radiology\",\n  \"monthlyBudget\": 18000\n}"
+            },
+            "url": "{{baseUrl}}/api/departments"
+          }
+        },
+        {
+          "name": "Get Department by Id",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "GET",
+            "url": "{{baseUrl}}/api/departments/{{departmentId}}"
+          }
+        },
+        {
+          "name": "Get All Departments",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "GET",
+            "url": "{{baseUrl}}/api/departments"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "Create Item",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"MED-003\",\n  \"name\": \"Amoxicillin 500mg\",\n  \"category\": 0,\n  \"unitPrice\": 8.50,\n  \"availableQuantity\": 400,\n  \"requiresPharmacyApproval\": true,\n  \"isControlledMedication\": false\n}"
+            },
+            "url": "{{baseUrl}}/api/items"
+          }
+        },
+        {
+          "name": "Update Item",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"MED-001\",\n  \"name\": \"Paracetamol 500mg\",\n  \"category\": 0,\n  \"unitPrice\": 6.00,\n  \"requiresPharmacyApproval\": true,\n  \"isControlledMedication\": false\n}"
+            },
+            "url": "{{baseUrl}}/api/items/{{itemId}}"
+          }
+        },
+        {
+          "name": "Get Item by Id",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "GET",
+            "url": "{{baseUrl}}/api/items/{{itemId}}"
+          }
+        },
+        {
+          "name": "Search Items",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "GET",
+            "url": "{{baseUrl}}/api/items?search=med&category=Medication&page=1&pageSize=20"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Supply Requests",
+      "item": [
+        {
+          "name": "Create Draft Request",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departmentId\": 1,\n  \"requestedBy\": \"requester@company.com\",\n  \"items\": [\n    { \"itemId\": 1, \"requestedQuantity\": 5 },\n    { \"itemId\": 3, \"requestedQuantity\": 2 }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/supply-requests"
+          }
+        },
+        {
+          "name": "Get Request Details",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "GET",
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}"
+          }
+        },
+        {
+          "name": "Search Supply Requests",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "GET",
+            "url": "{{baseUrl}}/api/supply-requests?departmentId=1&page=1&pageSize=20"
+          }
+        },
+        {
+          "name": "Submit Request",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/submit"
+          }
+        },
+        {
+          "name": "Approve Request (Manager)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approvalType\": 0,\n  \"comments\": \"Approved by department manager.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/approve"
+          }
+        },
+        {
+          "name": "Approve Request (Pharmacy)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approvalType\": 1,\n  \"comments\": \"Medication quantities reviewed.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/approve"
+          }
+        },
+        {
+          "name": "Approve Request (Finance)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approvalType\": 2,\n  \"comments\": \"Within budget.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/approve"
+          }
+        },
+        {
+          "name": "Reject Request",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approvalType\": 2,\n  \"reason\": \"The request exceeds the approved budget.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/reject"
+          }
+        },
+        {
+          "name": "Cancel Request",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/cancel"
+          }
+        },
+        {
+          "name": "Fulfill Request",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}" }] },
+            "method": "POST",
+            "url": "{{baseUrl}}/api/supply-requests/{{requestId}}/fulfill"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+graph TD
+    subgraph API["MedicalSupply.Api"]
+        A1[Controllers]
+        A2[JWT Authentication / Authorization]
+        A3[Exception Handling Middleware]
+        A4[Swagger]
+    end
+
+    subgraph APP["MedicalSupply.Application"]
+        B1[Use Cases<br/>SupplyRequestService, DepartmentService, ItemService]
+        B2[DTOs]
+        B3[Abstractions<br/>IApplicationDbContext, ICurrentUserService,<br/>IRequestNumberGenerator, ITokenGenerator]
+    end
+
+    subgraph DOM["MedicalSupply.Domain"]
+        C1[Entities<br/>Department, Item, SupplyRequest,<br/>SupplyRequestItem, ApprovalRecord]
+        C2[Enums]
+        C3[Domain Exceptions]
+    end
+
+    subgraph INFRA["MedicalSupply.Infrastructure"]
+        D1[EF Core DbContext + Configurations]
+        D2[Migrations + Seed Data]
+        D3[JWT Token Generator]
+        D4[Hardcoded User Store]
+        D5[Request Number Sequence]
+    end
+
+    API -->|references| APP
+    API -->|references| INFRA
+    INFRA -->|implements interfaces from| APP
+    INFRA -->|references| DOM
+    APP -->|references only| DOM
+
+    style DOM fill:#e8f5e9
+    style APP fill:#e3f2fd
+    style INFRA fill:#fff3e0
+    style API fill:#fce4ec
