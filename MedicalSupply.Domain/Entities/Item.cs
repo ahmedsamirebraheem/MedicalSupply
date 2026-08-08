@@ -83,6 +83,26 @@ namespace MedicalSupply.Domain.Entities
             ReservedQuantity -= quantity;
             AvailableQuantity -= quantity;
         }
+        public void UpdateDetails(
+    string code, string name, ItemCategory category, decimal unitPrice,
+    bool requiresPharmacyApproval, bool isControlledMedication)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+                throw new ArgumentException("Item code is required.");
+
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Item name is required.");
+
+            if (unitPrice < 0)
+                throw new ArgumentException("Unit price cannot be negative.");
+
+            Code = code;
+            Name = name;
+            Category = category;
+            UnitPrice = unitPrice;
+            RequiresPharmacyApproval = requiresPharmacyApproval;
+            IsControlledMedication = isControlledMedication;
+        }
 
         public void Deactivate() => IsActive = false;
         public void Activate() => IsActive = true;
