@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MedicalSupply.Api/MedicalSupply.Api.csproj" />
+  <Project Path="MedicalSupply.Application/MedicalSupply.Application.csproj" />
+  <Project Path="MedicalSupply.Domain/MedicalSupply.Domain.csproj" />
+  <Project Path="MedicalSupply.Infrastructure/MedicalSupply.Infrastructure.csproj" />
+</Solution>
