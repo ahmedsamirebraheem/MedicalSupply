@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MedicalSupply.Domain.Exceptions
 {
-    internal class BudgetExceededException : Exception
+    public class BudgetExceededException : Exception
     {
         public BudgetExceededException(string message) : base(message) { }
     }
